@@ -40,4 +40,16 @@ class TodolistApplicationTests {
 				.andExpect(jsonPath("$[0].finished").value(todo.isFinished()))
 				.andExpect(jsonPath("$[0].priority").value(todo.getPriority()));
 	}
+
+	@Test
+	void testCreateTodoFailure() throws Exception {
+		var invalidTodo = new Todo("", "", false, 0);
+
+		mockMvc.perform(
+						post("/todos")
+								.contentType(MediaType.APPLICATION_JSON)
+								.content(objectMapper.writeValueAsString(invalidTodo))
+				)
+				.andExpect(status().isBadRequest());
+	}
 }
