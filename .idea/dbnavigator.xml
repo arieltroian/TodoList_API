@@ -14,7 +14,7 @@
   </component>
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DatabaseAssistantManager">
@@ -29,7 +29,16 @@
             <context provider="" profile="" model="" action="" interactive="true" />
           </chat>
         </chats>
-        <tools />
+        <tools>
+          <approvals>
+            <categories>
+              <category id="IDE_ACTION_INVOKER" status="PROMPTED" />
+            </categories>
+            <types>
+              <type id="SQL_CONSOLE_EDITORS" status="PROMPTED" />
+            </types>
+          </approvals>
+        </tools>
       </assistant-state>
     </assistants>
     <selection-state>
@@ -44,7 +53,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="a9664f2f-f34f-44b0-928e-73ef84106a7f">
-      <console name="todolist" type="STANDARD" schema="mysql" session="Main" />
+      <console name="todolist" type="STANDARD" schema="todolist" session="Main" />
     </connection>
     <connection id="a9dc4f9c-d64b-4ed0-b363-af54d21994a1">
       <console name="Connection" type="STANDARD" schema="mysql" session="Main" />
@@ -70,7 +79,7 @@
     <last-used-operator value="EQUAL" />
     <filters />
   </component>
-  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
+  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="false">
     <recently-used-interfaces>
       <mapping database-type="MYSQL" interface-id="DEFAULT" />
     </recently-used-interfaces>
