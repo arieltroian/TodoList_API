@@ -17,22 +17,22 @@ public class TodoController {
     }
 
     @PostMapping
-    List<Todo>create(@RequestBody @Valid Todo todo) {
-        return todoService.create(todo);
+    List<Todo>create(@RequestHeader("X-USER-ID") Long userId, @RequestBody @Valid Todo todo) {
+        return todoService.create(userId, todo);
     }
 
     @GetMapping
-    List<Todo> list() {
-        return todoService.list();
+    List<Todo> list(@RequestHeader("X-USER-ID") Long userId) {
+        return todoService.list(userId);
     }
 
-    @PutMapping
-    List<Todo> update(@RequestBody Todo todo) {
-        return todoService.update(todo);
+    @PutMapping("/{id}")
+    List<Todo> update(@RequestHeader("X-USER-ID") Long userId,@PathVariable Long id, @RequestBody @Valid Todo todo) {
+        return todoService.update(userId, id, todo);
     }
 
-    @DeleteMapping("{id}")
-    List<Todo> delete(@PathVariable("id") Long id) {
-        return todoService.delete(id);
+    @DeleteMapping("/{id}")
+    List<Todo> delete(@RequestHeader("X-USER-ID") Long userId, @PathVariable Long id) {
+        return todoService.delete(userId, id);
     }
 }
