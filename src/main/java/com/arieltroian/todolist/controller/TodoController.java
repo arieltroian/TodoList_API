@@ -2,6 +2,7 @@ package com.arieltroian.todolist.controller;
 
 import com.arieltroian.todolist.entity.Todo;
 import com.arieltroian.todolist.service.TodoService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,5 +35,11 @@ public class TodoController {
     @DeleteMapping("/{id}")
     List<Todo> delete(@RequestHeader("X-USER-ID") Long userId, @PathVariable Long id) {
         return todoService.delete(userId, id);
+    }
+
+    @GetMapping
+    public List<Todo> list(HttpServletRequest request) {
+        Long userId = (Long) request.getAttribute("userId");
+        return todoService.list(userId);
     }
 }
