@@ -1,6 +1,7 @@
 package com.arieltroian.todolist.controller;
 
 import com.arieltroian.todolist.dto.LoginRequest;
+import com.arieltroian.todolist.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
