@@ -8,7 +8,7 @@ API para gerenciar tarefas (CRUD).
 -   Spring MVC
 -   Spring Data JPA
 -   SpringDoc OpenAPI 3
--   Mysql
+-   PostgreSQL
 
 ## Como executar
 
