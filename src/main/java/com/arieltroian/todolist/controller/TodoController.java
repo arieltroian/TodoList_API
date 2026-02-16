@@ -4,6 +4,7 @@ import com.arieltroian.todolist.entity.Todo;
 import com.arieltroian.todolist.service.TodoService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,28 +19,33 @@ public class TodoController {
     }
 
     @PostMapping
-    List<Todo>create(@RequestHeader("X-USER-ID") Long userId, @RequestBody @Valid Todo todo) {
+    public List<Todo>create(@RequestBody @Valid Todo todo) {
+        Long userId = getAuthenticatedUserId();
         return todoService.create(userId, todo);
     }
 
     @GetMapping
-    List<Todo> list(@RequestHeader("X-USER-ID") Long userId) {
+    public List<Todo> list() {
+        Long userId = getAuthenticatedUserId();
         return todoService.list(userId);
     }
 
     @PutMapping("/{id}")
-    List<Todo> update(@RequestHeader("X-USER-ID") Long userId,@PathVariable Long id, @RequestBody @Valid Todo todo) {
+    public List<Todo> update(@PathVariable Long id, @RequestBody @Valid Todo todo) {
+        Long userId = getAuthenticatedUserId();
         return todoService.update(userId, id, todo);
     }
 
     @DeleteMapping("/{id}")
-    List<Todo> delete(@RequestHeader("X-USER-ID") Long userId, @PathVariable Long id) {
+    public List<Todo> delete(@PathVariable Long id) {
+        Long userId = getAuthenticatedUserId();
         return todoService.delete(userId, id);
     }
 
-    @GetMapping
-    public List<Todo> list(HttpServletRequest request) {
-        Long userId = (Long) request.getAttribute("userId");
-        return todoService.list(userId);
+    private Long getAuthenticatedUserId() {
+        return (Long) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
     }
 }

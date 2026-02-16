@@ -1,5 +1,6 @@
 package com.arieltroian.todolist.service;
 
+import com.arieltroian.todolist.dto.CreateUserRequest;
 import com.arieltroian.todolist.entity.User;
 import com.arieltroian.todolist.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Service
 public class UserService {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -17,11 +19,15 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User create(User user) {
-        if(userRepository.findByEmail(user.getEmail()).isPresent()) {
+    public User create(CreateUserRequest request) {
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new RuntimeException("Esse email já existe!");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        User user = new User(request.getName(),
+                request.getEmail(),
+                passwordEncoder.encode(request.getPassword()));
+
         return userRepository.save(user);
     }
 
@@ -30,6 +36,8 @@ public class UserService {
     }
 
     public User findById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
+        return userRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
     }
 }
