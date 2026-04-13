@@ -2,7 +2,6 @@ package com.arieltroian.todolist.controller;
 
 import com.arieltroian.todolist.entity.Todo;
 import com.arieltroian.todolist.service.TodoService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
